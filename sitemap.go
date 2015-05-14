@@ -43,10 +43,11 @@ func (s *Sitemap) Exists(p string) bool {
 
 // SortedPaths returns all paths within the site sorted alphabetically.
 func (s *Sitemap) SortedPaths() []string {
-	paths := []string{}
+	paths := make([]string, 0, len(s.pages))
+
 	s.Lock()
-	for i := range s.pages {
-		paths = append(paths, i)
+	for path := range s.pages {
+		paths = append(paths, path)
 	}
 	s.Unlock()
 
